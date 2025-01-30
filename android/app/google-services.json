@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "967369894083",
+    "project_id": "notesapp-9292",
+    "storage_bucket": "notesapp-9292.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967369894083:android:c290c581238e87fec1da76",
+        "android_client_info": {
+          "package_name": "com.noumi.notes_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCs9Rt4D-zror2lOZkMZxNl0RFhTAGTAqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
