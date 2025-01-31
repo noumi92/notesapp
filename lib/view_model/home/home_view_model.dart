@@ -21,7 +21,10 @@ class HomeViewModel with ChangeNotifier {
 
   /// Add a note to the repository.
   Future<void> addNote(BuildContext context) async {
-    NoteModel note = NoteModel(id: "id", title: "title", subTitle: "subTitle");
+    NoteModel note = NoteModel(
+        id: title.text.substring(2).trim(),
+        title: title.text,
+        subTitle: subTitle.text);
     await _notesRepository.addNote(note);
     _notes = await _notesRepository.getAllNotes();
     notifyListeners();
@@ -34,19 +37,21 @@ class HomeViewModel with ChangeNotifier {
 
   Future<void> getNote(String noteId) async {
     currentNote = await _notesRepository.getNote(noteId);
-    editTitleController.text = currentNote.title;
-    editSubTitleController.text = currentNote.subTitle;
+    notifyListeners();
   }
 
-  Future<void> updateNote(NoteModel note) async {
-    await _notesRepository.updateNote(note);
+  Future<void> updateNote() async {
+    currentNote.title = editTitleController.text;
+    currentNote.subTitle = editSubTitleController.text;
+    await _notesRepository.updateNote(currentNote);
     getAllNotes();
     notifyListeners();
   }
 
   void deleteNote(String id) async {
     await _notesRepository.deleteNote(id);
-    getAllNotes();
+    currentNote = NoteModel.empty();
+    await getAllNotes();
     notifyListeners();
   }
 
@@ -54,19 +59,20 @@ class HomeViewModel with ChangeNotifier {
     _authRepository.logout(context);
   }
 
-  void openNote(int index, BuildContext context) async {
-    await getNote(notes[index].id);
+  void openNote(String id, BuildContext context) async {
+    getNote(id);
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => NoteView(noteId: currentNote.id)),
+      MaterialPageRoute(builder: (context) => const NoteView()),
     );
   }
 
   void editNote(BuildContext context) {
+    editTitleController.text = currentNote.title;
+    editSubTitleController.text = currentNote.subTitle;
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) => EditNoteView(noteId: currentNote.id)),
+      MaterialPageRoute(builder: (context) => EditNoteView()),
     );
   }
 }

@@ -5,13 +5,11 @@ import '../../view_model/home/home_view_model.dart';
 
 /// View for adding a new note.
 class NoteView extends StatelessWidget {
-  final String noteId;
-  const NoteView({super.key, required this.noteId});
+  const NoteView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final homeVM = Provider.of<HomeViewModel>(context);
-    homeVM.getNote(noteId);
     return Scaffold(
       appBar: AppBar(
         title: const Center(

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/common/widgets/app_bar/app_bar.dart';
+import 'package:notes_app/views/home/home_view.dart';
 import 'package:provider/provider.dart';
 
 import '../../view_model/home/home_view_model.dart';
 
 /// View for adding a new note.
 class EditNoteView extends StatefulWidget {
-  final String noteId;
-  const EditNoteView({super.key, required this.noteId});
+  const EditNoteView({super.key});
 
   @override
   State<EditNoteView> createState() => _EditNoteViewState();
@@ -16,8 +16,8 @@ class EditNoteView extends StatefulWidget {
 class _EditNoteViewState extends State<EditNoteView> {
   @override
   Widget build(BuildContext context) {
+    print("build called");
     final homeVM = Provider.of<HomeViewModel>(context);
-    homeVM.getNote(widget.noteId);
     return Scaffold(
         appBar: const TAppBar(title: "Edit Note"),
         body: SingleChildScrollView(
@@ -31,7 +31,7 @@ class _EditNoteViewState extends State<EditNoteView> {
                 controller: homeVM.editTitleController,
                 onChanged: (value) {
                   setState(() {
-                    homeVM.currentNote.title = value;
+                    homeVM.editTitleController.text = value;
                   });
                 },
                 textAlign: TextAlign.start,
@@ -55,7 +55,7 @@ class _EditNoteViewState extends State<EditNoteView> {
                 controller: homeVM.editSubTitleController,
                 onChanged: (value) {
                   setState(() {
-                    homeVM.currentNote.subTitle = value;
+                    homeVM.editSubTitleController.text = value;
                   });
                 },
                 textAlign: TextAlign.start,
@@ -77,7 +77,7 @@ class _EditNoteViewState extends State<EditNoteView> {
                 children: [
                   ElevatedButton(
                       onPressed: () {
-                        homeVM.updateNote(homeVM.currentNote);
+                        homeVM.updateNote();
                         Navigator.pop(context);
                       },
                       child: Padding(
@@ -87,7 +87,10 @@ class _EditNoteViewState extends State<EditNoteView> {
                   OutlinedButton(
                       onPressed: () {
                         homeVM.deleteNote(homeVM.currentNote.id);
-                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomeView()),
+                        );
                       },
                       child: const Text("Delete Note")),
                 ],
@@ -100,8 +103,6 @@ class _EditNoteViewState extends State<EditNoteView> {
   @override
   void initState() {
     super.initState();
-
-    // homeVM.titleController.text = note.title;
-    // homeVM.subTitleController.text = note.subTitle;
+    print("initState");
   }
 }

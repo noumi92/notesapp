@@ -16,6 +16,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final homeVM = Provider.of<HomeViewModel>(context);
+    homeVM.getAllNotes();
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text("My notes")),
@@ -37,7 +38,7 @@ class _HomeViewState extends State<HomeView> {
               title: Text(homeVM.notes[index].title),
               subtitle: Text(homeVM.notes[index].subTitle),
               onTap: () {
-                homeVM.openNote(index, context);
+                homeVM.openNote(homeVM.notes[index].id, context);
               },
             );
           }),
