@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/view_model/home/home_view_model.dart';
 import 'package:notes_app/views/home/add_note_view.dart';
-import 'package:notes_app/views/home/note_view.dart';
 import 'package:provider/provider.dart';
 
 /// View for the home screen of the application.
@@ -38,12 +37,7 @@ class _HomeViewState extends State<HomeView> {
               title: Text(homeVM.notes[index].title),
               subtitle: Text(homeVM.notes[index].subTitle),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          NoteView(noteId: homeVM.notes[index].id.toString())),
-                );
+                homeVM.openNote(index, context);
               },
             );
           }),

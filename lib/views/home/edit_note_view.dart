@@ -72,13 +72,18 @@ class _EditNoteViewState extends State<EditNoteView> {
               ),
               const SizedBox(height: 24.0),
               Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
                       onPressed: () {
                         homeVM.updateNote(homeVM.currentNote);
                         Navigator.pop(context);
                       },
-                      child: const Text("Update Note")),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: const Text("Update Note"),
+                      )),
                   OutlinedButton(
                       onPressed: () {
                         homeVM.deleteNote(homeVM.currentNote.id);

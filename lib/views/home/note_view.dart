@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../view_model/home/home_view_model.dart';
-import 'edit_note_view.dart';
 
 /// View for adding a new note.
 class NoteView extends StatelessWidget {
@@ -38,12 +37,7 @@ class NoteView extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              EditNoteView(noteId: homeVM.currentNote.id)),
-                    );
+                    homeVM.editNote(context);
                   },
                   child: const Text("Edit Note")),
             ),

@@ -24,11 +24,11 @@ class NotesRepository {
     return notes;
   }
 
-  void deleteNote(String id) async {
+  Future<void> deleteNote(String id) async {
     await _db.collection("notes").doc(id.toString()).delete();
   }
 
-  void updateNote(NoteModel note) async {
+  Future<void> updateNote(NoteModel note) async {
     await _db.collection("notes").doc(note.id.toString()).update(note.toJson());
   }
 

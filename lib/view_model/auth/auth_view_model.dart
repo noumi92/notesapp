@@ -116,8 +116,4 @@ class AuthViewModel extends ChangeNotifier {
       );
     }
   }
-
-  void checkLogin(BuildContext context) {
-    _auth.checkLogin(context);
-  }
 }

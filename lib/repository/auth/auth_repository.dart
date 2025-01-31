@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../views/auth/login/login_view.dart';
-import '../../views/home/home_view.dart';
 
 class AuthRepository {
   ///Variables
@@ -31,11 +30,12 @@ class AuthRepository {
         context, MaterialPageRoute(builder: (context) => const LoginView()));
   }
 
-  checkLogin(BuildContext context) async {
+  bool checkLogin(BuildContext context) {
     final user = _auth.currentUser;
     if (user != null) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const HomeView()));
+      return true;
+    } else {
+      return false;
     }
   }
 }

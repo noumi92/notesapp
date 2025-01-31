@@ -2,8 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:notes_app/utils/theme/theme.dart';
 import 'package:notes_app/view_model/auth/auth_view_model.dart';
+import 'package:notes_app/view_model/auth/splash_view_model.dart';
 import 'package:notes_app/view_model/home/home_view_model.dart';
-import 'package:notes_app/views/auth/login/login_view.dart';
+import 'package:notes_app/views/auth/splash_view.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -25,13 +26,14 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => HomeViewModel()),
         ChangeNotifierProvider(create: (context) => AuthViewModel()),
+        ChangeNotifierProvider(create: (context) => SplashViewModel()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         themeMode: ThemeMode.system,
         darkTheme: TAppTheme.darkTheme,
         theme: TAppTheme.lightTheme,
-        home: const LoginView(),
+        home: const SplashView(),
       ),
     );
   }
